@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Password Manager",
         description: "Safely manage your passwords in a secure, lightweight web app.",
-        url: "https://yourdomain.com",
+        url: "https://password-manager-karthik-sivakumars-projects.vercel.app/",
         siteName: "Password Manager",
         type: "website",
     },
