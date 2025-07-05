@@ -8,7 +8,7 @@ export default function Home() {
         <>
             <Header settingsDisabled />
             <div className="mt-6 flex flex-col flex-1">
-                <Heading title="How to Use" desc="This simple password manager lets you securely store, view, and manage your passwords in memory during your session. You can also download them as an encrypted file and restore them later. Follow the steps below to get started." />
+                <Heading title="How to Use" desc="This simple password manager lets you securely store, view, and manage your passwords in memory during your session. You can also save them as an encrypted file and restore them later. Follow the steps below to get started." />
                 
                 <ol className="list-decimal list-inside space-y-6 mt-6 text-sm font-semibold">
                     <li>
@@ -33,9 +33,9 @@ export default function Home() {
                     </li>
 
                     <li>
-                        Download Your Passwords:<br />
+                        Save Your Passwords:<br />
                         <span className="font-normal text-gray-600 dark:text-gray-300">
-                            Click the <strong>Settings</strong> icon → <strong>Download</strong>. Enter a <strong>Master Password</strong> — this will be used to encrypt the file. Save the <code>.enc</code> file to your computer.<br />
+                            Click the <strong>Settings</strong> icon → <strong>Save</strong>. Enter a <strong>Master Password</strong> — this will be used to encrypt the file. Save the <code>.enc</code> file to your device.<br />
                             <em className="text-red-500">Keep this Master Password safe — it cannot be recovered if lost.</em>
                         </span>
                     </li>
@@ -43,7 +43,7 @@ export default function Home() {
                     <li>
                         Upload Existing Passwords:<br />
                         <span className="font-normal text-gray-600 dark:text-gray-300">
-                            Click the <strong>Settings</strong> icon → <strong>Upload</strong>, or use the upload button on the empty screen. Select a <code>.enc</code> file you previously downloaded. Enter the <strong>correct Master Password</strong> used when encrypting it. Your saved passwords will be decrypted and restored.
+                            Click the <strong>Settings</strong> icon → <strong>Upload</strong>, or use the upload button on the empty screen. Select a <code>.enc</code> file you previously downloaded. Enter the <strong>correct Master Password</strong> used when encrypting it. Your saved passwords will be decrypted and displayed.
                         </span>
                     </li>
 
@@ -57,7 +57,7 @@ export default function Home() {
                     <li>
                         Keyboard Shortcuts:<br />
                         <span className="font-normal text-gray-600 dark:text-gray-300">
-                            Press <code>Ctrl + D</code> to open the <strong>Download</strong> dialog. Press <code>Ctrl + U</code> to open the <strong>Upload</strong> dialog.
+                            Press <code>Ctrl + S</code> to <strong>Save</strong> the file. Press <code>Ctrl + U</code> to <strong>Upload</strong> a file.
                         </span>
                     </li>
 

@@ -70,13 +70,13 @@ export function AddDialog({ onAdd, records }: AddDialogProps) {
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-<DialogTrigger asChild>
-    <Button className="text-xs cursor-pointer gap-1">
-        <GoPlus />
-        <span className="sm:hidden">Add</span>
-        <span className="hidden sm:inline">Add New Password</span>
-    </Button>
-</DialogTrigger>
+            <DialogTrigger asChild>
+                <Button className="text-xs cursor-pointer gap-1">
+                    <GoPlus />
+                    <span className="sm:hidden">Add</span>
+                    <span className="hidden sm:inline">Add New Password</span>
+                </Button>
+            </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Add New Password</DialogTitle>

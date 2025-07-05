@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { SlSettings } from "react-icons/sl";
-import { LuFileUp, LuFileDown } from "react-icons/lu";
+import { FiSave } from "react-icons/fi";
+import { MdOutlineFileUpload } from "react-icons/md";
 import { PasswordRecord } from "@/app/libs/types";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { usePasswordManagerContext } from "@/app/libs/PasswordManagerContext";
 import { handleUpload } from "@/app/libs/fileHandlers";
-import { isDownloadDisabled } from "@/app/libs/fileHandlers";
+import { isSaveDisabled } from "@/app/libs/fileHandlers";
 
 type SettingsDropdownProps = {
     records: PasswordRecord[];
@@ -25,7 +26,7 @@ type SettingsDropdownProps = {
 };
 
 export default function SettingsDropdown({ records, settingsDisabled = false }: SettingsDropdownProps) {
-    const disabled = isDownloadDisabled(records);
+    const disabled = isSaveDisabled(records);
     const { openPasswordDialog } = usePasswordManagerContext();
 
     return (
@@ -50,7 +51,7 @@ export default function SettingsDropdown({ records, settingsDisabled = false }: 
                             });
                         }}
                     >
-                        <LuFileUp />
+                        <MdOutlineFileUpload color="currentColor"/>
                         Upload
                         <DropdownMenuShortcut>Ctrl+U</DropdownMenuShortcut>
                     </DropdownMenuItem>
@@ -59,17 +60,17 @@ export default function SettingsDropdown({ records, settingsDisabled = false }: 
                         className={`gap-1 ${disabled ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}
                         disabled={disabled}
                         onClick={() => {
-                            openPasswordDialog({ action: 'download' });
+                            openPasswordDialog({ action: 'save' });
                         }}
                     >
-                        <LuFileDown />
-                        Download
-                        <DropdownMenuShortcut>Ctrl+D</DropdownMenuShortcut>
+                        <FiSave color="currentColor" />
+                        Save
+                        <DropdownMenuShortcut>Ctrl+S</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                    <Link href="mailto:karthik29062000@gmail.com" className="cursor-pointer w-full">Contact</Link>
+                    <Link href="mailto:karthik29062000@gmail.com" target="_blank" className="cursor-pointer w-full">Contact</Link>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
