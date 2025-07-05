@@ -1,9 +1,11 @@
 import { Input } from "@/components/ui/input";
 
 export function Search({
+    isSaveDisabled,
     value,
     onChange
 }: {
+    isSaveDisabled: boolean;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
@@ -14,6 +16,7 @@ export function Search({
             value={value}
             onChange={onChange}
             className="w-full text-sm"
+            disabled={isSaveDisabled}
         />
     );
 }

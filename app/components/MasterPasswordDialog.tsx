@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { IoAlertCircleOutline } from "react-icons/io5";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -11,10 +12,11 @@ type PasswordDialogProps = {
     open: boolean;
     onClose: () => void;
     onSubmit: (password: string) => Promise<boolean>;
-    action: 'download' | 'upload';
+    action: 'save' | 'upload';
 };
 
 export default function PasswordDialog({ open, onClose, onSubmit, action }: PasswordDialogProps) {
+    const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -28,8 +30,8 @@ export default function PasswordDialog({ open, onClose, onSubmit, action }: Pass
     const handleConfirm = async () => {
         const trimmed = password.trim();
         if (!trimmed) {
-            if (action === 'download') {
-                setError("Password is required to download the file.");
+            if (action === 'save') {
+                setError("Password is required to save the file.");
             }
             onClose();
             return;
@@ -49,22 +51,33 @@ export default function PasswordDialog({ open, onClose, onSubmit, action }: Pass
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {action === 'download' ? 'Set a Master Password' : 'Enter Master Password'}
+                        {action === 'save' ? 'Set a Master Password' : 'Enter Master Password'}
                     </DialogTitle>
 
                     <DialogDescription>
-                        {action === 'download'
+                        {action === 'save'
                             ? 'This password will secure your file. You’ll need it to open the file later, and it cannot be recovered if lost.'
                             : 'Enter the password used to secure this file. You’ll need the exact password it was encrypted with.'}
                     </DialogDescription>
                 </DialogHeader>
 
-                <Input
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="flex gap-2">
+                    <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter your password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        type="button"
+                        className="cursor-pointer"
+                        onClick={() => setShowPassword(prev => !prev)}
+                    >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </Button>
+                </div>
 
                 {error && (
                     <Alert variant="destructive">

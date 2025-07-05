@@ -1,7 +1,7 @@
 "use client";
 
 import { PiCactusThin } from "react-icons/pi";
-import { LuFileUp } from "react-icons/lu";
+import { MdOutlineFileUpload } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import { usePasswordManagerContext } from "@/app/libs/PasswordManagerContext";
 import { handleUpload } from "@/app/libs/fileHandlers";
@@ -14,7 +14,7 @@ export default function EmptyState({ search = false }: EmptyStateProps) {
     const { openPasswordDialog } = usePasswordManagerContext();
 
     return (
-        <div className="flex flex-col items-center gap-2 flex-1 justify-center">
+        <div className="flex flex-col items-center gap-2 flex-1 justify-center mt-8">
             <PiCactusThin size={120} className="text-gray-600 dark:text-gray-300" />
             <div className="text-center">
                 {search ? (
@@ -46,7 +46,7 @@ export default function EmptyState({ search = false }: EmptyStateProps) {
                         });
                     }}
                 >
-                    <LuFileUp />
+                    <MdOutlineFileUpload />
                     Upload
                 </Button>
             )}

@@ -1,7 +1,7 @@
 import { PasswordRecord } from "@/app/libs/types";
 import { encryptData } from "@/app/libs/encryption";
 
-export function isDownloadDisabled(records: PasswordRecord[]): boolean {
+export function isSaveDisabled(records: PasswordRecord[]): boolean {
     return records.length === 0;
 }
 
@@ -25,7 +25,7 @@ export function handleUpload(callback: (encryptedContent: string) => void) {
     input.click();
 }
 
-export async function handleDownload(data: any, filename = 'passwords.enc', password: string) {
+export async function handleSave(data: any, filename = 'passwords.enc', password: string) {
     try {
         const encrypted = await encryptData(data, password);
         if (!encrypted) return;

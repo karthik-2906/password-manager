@@ -21,7 +21,7 @@ export default function TermsPage() {
                     <li>
                         Session-Based Data:<br />
                         <span className="font-normal text-gray-600 dark:text-gray-300">
-                            All passwords are stored temporarily in your browser's memory. Once you close or refresh the page, the data is lost unless you download it.
+                            All passwords are stored temporarily in your browser's memory. Once you close or refresh the page, the data is lost unless you save it.
                         </span>
                     </li>
 

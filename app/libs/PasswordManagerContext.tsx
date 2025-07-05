@@ -1,11 +1,11 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { PasswordRecord } from '@/app/libs/types';
-import { handleDownload } from '@/app/libs/fileHandlers';
+import { handleSave } from '@/app/libs/fileHandlers';
 import { decryptData } from '@/app/libs/encryption';
-import PasswordDialog from '@/app/components/PasswordDialog';
+import PasswordDialog from '@/app/components/MasterPasswordDialog';
 import { toast } from 'sonner';
 
 type PasswordManagerContextType = {
@@ -19,7 +19,7 @@ type PasswordManagerContextType = {
     handleEdit: (id: string, updated: PasswordRecord) => void;
     handleAdd: (newRecord: PasswordRecord) => void;
     openPasswordDialog: (config: {
-        action: 'upload' | 'download';
+        action: 'upload' | 'save';
         encryptedContent?: string;
         onSuccess?: (records?: PasswordRecord[]) => void;
     }) => void;
@@ -33,16 +33,31 @@ export function PasswordManagerProvider({ children }: { children: React.ReactNod
     const [showPasswords, setShowPasswords] = useState<Record<string, boolean>>({});
 
     const [passwordModalOpen, setPasswordModalOpen] = useState(false);
-    const [modalAction, setModalAction] = useState<'upload' | 'download'>('upload');
+    const [modalAction, setModalAction] = useState<'upload' | 'save'>('upload');
     const [pendingEncryptedContent, setPendingEncryptedContent] = useState<string | null>(null);
     const [onSuccessCallback, setOnSuccessCallback] = useState<((records?: PasswordRecord[]) => void) | null>(null);
+
+    useEffect(() => {
+        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+            if (records.length > 0) {
+                e.preventDefault();
+                e.returnValue = ''; // Required for Chrome to show the prompt
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [records]);
 
     const openPasswordDialog = ({
         action,
         encryptedContent,
         onSuccess,
     }: {
-        action: 'upload' | 'download';
+        action: 'upload' | 'save';
         encryptedContent?: string;
         onSuccess?: (records?: PasswordRecord[]) => void;
     }) => {
@@ -53,8 +68,8 @@ export function PasswordManagerProvider({ children }: { children: React.ReactNod
     };
 
     const handlePasswordSubmit = async (password: string): Promise<boolean> => {
-        if (modalAction === 'download') {
-            await handleDownload(records, 'passwords.enc', password);
+        if (modalAction === 'save') {
+            await handleSave(records, 'passwords.enc', password);
             return true;
         }
 
