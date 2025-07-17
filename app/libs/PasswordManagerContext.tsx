@@ -41,7 +41,7 @@ export function PasswordManagerProvider({ children }: { children: React.ReactNod
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {
             if (records.length > 0) {
                 e.preventDefault();
-                e.returnValue = ''; // Required for Chrome to show the prompt
+                e.returnValue = '';
             }
         };
 
