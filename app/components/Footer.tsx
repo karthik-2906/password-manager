@@ -34,6 +34,14 @@ export default function Footer() {
                     >
                         Terms & Privacy
                     </Link>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">|</p>
+                    <Link
+                        href="https://github.com/karthik-2906/password-manager"
+                        target="_blank"
+                        className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white transition"
+                    >
+                        Github
+                    </Link>
                 </div>
             </footer>
         </>

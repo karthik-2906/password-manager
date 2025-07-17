@@ -10,6 +10,10 @@ export default function TermsPage() {
             <div className="mt-6 flex flex-col flex-1">
                 <Heading title="Terms & Privacy" desc="Your data, your control. This application is a client-side password manager that prioritizes your privacy and control. Below are the terms of use and details about how your data is handled." />
 
+                <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
+                    <strong>Important:</strong> This app relies entirely on your browser for encryption and storage. If your device or browser is compromised, your encrypted data and master password may be at risk. Always use this tool on secure, trusted devices.
+                </p>
+
                 <ol className="list-decimal list-inside space-y-6 mt-6 text-sm font-semibold">
                     <li>
                         No Cloud Storage:<br />
@@ -57,6 +61,13 @@ export default function TermsPage() {
                         Open and Transparent:<br />
                         <span className="font-normal text-gray-600 dark:text-gray-300">
                             This tool is built with transparency in mind. All encryption happens locally in your browser using secure algorithms.
+                        </span>
+                    </li>
+
+                    <li>
+                        Device & Browser Security:<br />
+                        <span className="font-normal text-gray-600 dark:text-gray-300">
+                            Since all encryption and data handling happens in your browser, if your device or browser is compromised (e.g., by malware, malicious extensions, or other attacks), your data may be at risk. Always use this app on secure, trusted devices.
                         </span>
                     </li>
                 </ol>
