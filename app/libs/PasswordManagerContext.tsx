@@ -91,7 +91,13 @@ export function PasswordManagerProvider({ children }: { children: React.ReactNod
 
     const getFaviconUrl = (url: string): string | null => {
         try {
-            const hostname = new URL(url).hostname;
+            const parsedUrl = new URL(url);
+            const hostname = parsedUrl.hostname;
+
+            if (hostname === "mail.google.com") {
+                return "https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico";
+            }
+
             return `https://www.google.com/s2/favicons?sz=64&domain=${hostname}`;
         } catch {
             return null;

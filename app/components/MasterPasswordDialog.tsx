@@ -29,11 +29,13 @@ export default function PasswordDialog({ open, onClose, onSubmit, action }: Pass
 
     const handleConfirm = async () => {
         const trimmed = password.trim();
+
         if (!trimmed) {
-            if (action === 'save') {
-                setError("Password is required to save the file.");
-            }
-            onClose();
+            setError(
+                action === 'save'
+                    ? "Password is required to save the file."
+                    : "Please enter a password to open the file."
+            );
             return;
         }
 
@@ -61,35 +63,43 @@ export default function PasswordDialog({ open, onClose, onSubmit, action }: Pass
                     </DialogDescription>
                 </DialogHeader>
 
-                <div className="flex gap-2">
-                    <Input
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        type="button"
-                        className="cursor-pointer"
-                        onClick={() => setShowPassword(prev => !prev)}
-                    >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </Button>
-                </div>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        handleConfirm();
+                    }}
+                >
+                    <div className="flex gap-2">
+                        <Input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            type="button"
+                            className="cursor-pointer"
+                            onClick={() => setShowPassword(prev => !prev)}
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </Button>
+                    </div>
 
-                {error && (
-                    <Alert variant="destructive">
-                        <IoAlertCircleOutline />
-                        <AlertTitle>Invalid password. Please retry</AlertTitle>
-                    </Alert>
-                )}
+                    {error && (
+                        <Alert variant="destructive" className="mt-2">
+                            <IoAlertCircleOutline />
+                            <AlertTitle>Invalid password. Please retry</AlertTitle>
+                        </Alert>
+                    )}
 
-                <div className="flex justify-end gap-2 mt-4">
-                    <Button variant="outline" className="cursor-pointer" onClick={onClose}>Cancel</Button>
-                    <Button onClick={handleConfirm} className="cursor-pointer">Confirm</Button>
-                </div>
+                    <div className="flex justify-end gap-2 mt-4">
+                        <Button type="button" variant="outline" className="cursor-pointer" onClick={onClose}>Cancel</Button>
+                        <Button type="submit" className="cursor-pointer">Confirm</Button>
+                    </div>
+                </form>
+
             </DialogContent>
         </Dialog>
     );

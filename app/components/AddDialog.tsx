@@ -105,7 +105,6 @@ export function AddDialog({ onAdd, records }: AddDialogProps) {
                                 name="password"
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
-                                className="pr-10"
                             />
                             <Button
                                 variant="outline"
