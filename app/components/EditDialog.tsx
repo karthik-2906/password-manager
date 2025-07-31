@@ -119,7 +119,6 @@ export function EditDialog({ record, onEdit }: EditDialogProps) {
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
                                 defaultValue={record.password}
-                                className="pr-10"
                             />
                             <Button
                                 type="button"
