@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
@@ -14,7 +14,8 @@ import { AddDialog } from "@/app/components/AddDialog";
 import { AccordionList } from "@/app/components/AccordionList";
 
 export default function Home() {
-    const { records, handleAdd, openPasswordDialog } = usePasswordManagerContext();
+    const { records, handleAdd, openPasswordDialog } =
+        usePasswordManagerContext();
     const saveDisabled = isSaveDisabled(records);
     const saveDisabledRef = useRef(saveDisabled);
     const [searchQuery, setSearchQuery] = useState("");
@@ -25,20 +26,20 @@ export default function Home() {
         const handleKeyDown = (e: KeyboardEvent) => {
             const isCtrl = e.ctrlKey || e.metaKey;
 
-            if (isCtrl && e.key.toLowerCase() === 'u') {
+            if (isCtrl && e.key.toLowerCase() === "u") {
                 e.preventDefault();
                 handleUpload((content) => {
                     openPasswordDialog({
-                        action: 'upload',
+                        action: "upload",
                         encryptedContent: content,
                     });
                 });
             }
 
-            if (isCtrl && e.key.toLowerCase() === 's') {
+            if (isCtrl && e.key.toLowerCase() === "s") {
                 e.preventDefault();
                 if (!saveDisabledRef.current) {
-                    openPasswordDialog({ action: 'save' });
+                    openPasswordDialog({ action: "save" });
                 }
             }
         };
@@ -52,18 +53,45 @@ export default function Home() {
             <Header />
             <div className="mt-4 flex flex-col flex-1">
                 <div className="mb-8">
-                    <p className="font-semibold">A simple and secure password manager that keeps your data private.</p>
+                    <p className="font-semibold">
+                        A simple and secure password manager that keeps your
+                        data private.
+                    </p>
                     <ul className="mt-2 list-disc pl-3 space-y-2 text-sm text-black dark:text-white">
-                        <li>Add your passwords directly in the app — no login or signup needed.</li>
-                        <li>Once you're done, save them to a <code>.enc</code> file on your device using a master password.</li>
-                        <li>You can upload this file later to view or update your passwords.</li>
-                        <li>If you upload and make changes, you will need to save again — a new file will be created.</li>
-                        <li>If you do not save, your data will be lost when you close or refresh the page.</li>
-                        <li>All data stays in your browser — nothing is sent to any server.</li>
+                        <li>
+                            Add your passwords directly in the app — no login or
+                            signup needed.
+                        </li>
+                        <li>
+                            Once you're done, save them to a <code>.enc</code>{" "}
+                            file on your device using a master password.
+                        </li>
+                        <li>
+                            You can upload this file later to view or update
+                            your passwords.
+                        </li>
+                        <li>
+                            If you upload and make changes, you will need to
+                            save again — a new file will be created.
+                        </li>
+                        <li>
+                            If you do not save, your data will be lost when you
+                            close or refresh the page.
+                        </li>
+                        <li>
+                            All data stays in your browser — nothing is sent to
+                            any server.
+                        </li>
                     </ul>
                     <div className="flex gap-2 mt-4">
                         <Link href="/how-to-use">
-                            <Button variant="secondary" size="sm" className="cursor-pointer border border-border">How to Use</Button>
+                            <Button
+                                variant="secondary"
+                                size="sm"
+                                className="cursor-pointer border border-border"
+                            >
+                                How to Use
+                            </Button>
                         </Link>
                         <Button
                             size="sm"
@@ -71,7 +99,7 @@ export default function Home() {
                             onClick={() => {
                                 handleUpload((content) => {
                                     openPasswordDialog({
-                                        action: 'upload',
+                                        action: "upload",
                                         encryptedContent: content,
                                     });
                                 });
@@ -82,14 +110,21 @@ export default function Home() {
                         </Button>
                     </div>
                 </div>
-                <Heading title="All Passwords" desc="Safely access and manage your passwords"/>
+                <Heading
+                    title="All Passwords"
+                    desc="Safely access and manage your passwords"
+                />
                 <div className="mt-6 flex gap-2">
-                    <Search isSaveDisabled={saveDisabled} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                    <Search
+                        isSaveDisabled={saveDisabled}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                     <Button
-                        variant='secondary'
+                        variant="secondary"
                         className="text-xs cursor-pointer gap-1 border border-box"
                         disabled={saveDisabled}
-                        onClick={() => openPasswordDialog({ action: 'save' })}
+                        onClick={() => openPasswordDialog({ action: "save" })}
                     >
                         <FiSave className="w-3 h-3" /> Save
                     </Button>
